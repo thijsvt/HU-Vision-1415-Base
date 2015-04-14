@@ -8,6 +8,9 @@ IntensityImageStudent::IntensityImageStudent() : IntensityImage() {
 IntensityImageStudent::IntensityImageStudent(const IntensityImageStudent &other) : IntensityImage(other.getWidth(), other.getHeight()) {
 	int throwError = 0, e = 1 / throwError;
 	//TODO: Create a copy from the other object
+	ptr = new int;
+	*ptr = *other.ptr;
+	// found solution at : http://www.tutorialspoint.com/cplusplus/cpp_copy_constructor.htm
 }
 
 IntensityImageStudent::IntensityImageStudent(const int width, const int height) : IntensityImage(width, height) {
