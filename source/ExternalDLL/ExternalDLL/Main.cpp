@@ -16,17 +16,17 @@ bool executeSteps(DLLExecution * executor);
 int main(int argc, char * argv[]) {
 
 	ImageFactory::setImplementation(ImageFactory::DEFAULT);
-	//ImageFactory::setImplementation(new ImageFactory::ImplementationStudent());
+	ImageFactory::setImplementation( ImageFactory::STUDENT); // uitcommente als je de normale functies wil gebruiken! nu gebruikt hij jou code en paden
 
 
-	ImageIO::debugFolder = "D:\\Users\\Rolf\\Downloads\\FaceMinMin";
+	ImageIO::debugFolder = "C:\\visionpractica\\debug";
 	ImageIO::isInDebugMode = true; //If set to false the ImageIO class will skip any image save function calls
 
 
 
 
 	RGBImage * input = ImageFactory::newRGBImage();
-	if (!ImageIO::loadImage("D:\\Users\\Rolf\\Downloads\\TestA5.jpg", *input)) {
+	if (!ImageIO::loadImage("C:\\visionpractica\\image\\male-1.png", *input)) {
 		std::cout << "Image could not be loaded!" << std::endl;
 		system("pause");
 		return 0;
