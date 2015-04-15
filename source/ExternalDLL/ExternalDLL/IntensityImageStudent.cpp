@@ -67,6 +67,9 @@ void IntensityImageStudent::setPixel(int i, Intensity pixel) {
 	* 7		7
 	* 8		8
 	*/
+	int x = i % getWidth();
+	int y = i / getWidth();
+	setPixel(x, y, pixel);
 }
 
 Intensity IntensityImageStudent::getPixel(int x, int y) const {
