@@ -23,5 +23,5 @@ public:
 	RGB getPixel(int x, int y) const;
 	RGB getPixel(int i) const;
 private:
-	int *ptr;
+	RGB **pixelArray;
 };

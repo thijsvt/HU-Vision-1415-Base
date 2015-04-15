@@ -8,14 +8,17 @@ IntensityImageStudent::IntensityImageStudent() : IntensityImage() {
 IntensityImageStudent::IntensityImageStudent(const IntensityImageStudent &other) : IntensityImage(other.getWidth(), other.getHeight()) {
 	int throwError = 0, e = 1 / throwError;
 	//TODO: Create a copy from the other object
-	ptr = new int;
-	*ptr = *other.ptr;
-	// found solution at : http://www.tutorialspoint.com/cplusplus/cpp_copy_constructor.htm
+
 }
 
 IntensityImageStudent::IntensityImageStudent(const int width, const int height) : IntensityImage(width, height) {
-	int throwError = 0, e = 1 / throwError;
+	//int throwError = 0, e = 1 / throwError;
 	//TODO: Initialize pixel storage
+	pixelArray = new Intensity*[width];
+
+	for (auto x = 0; x < width; x++){
+		pixelArray[x] = new Intensity[height];
+	}
 }
 
 IntensityImageStudent::~IntensityImageStudent() {
@@ -36,8 +39,9 @@ void IntensityImageStudent::set(const IntensityImageStudent &other) {
 }
 
 void IntensityImageStudent::setPixel(int x, int y, Intensity pixel) {
-	int throwError = 0, e = 1 / throwError;
+	//int throwError = 0, e = 1 / throwError;
 	//TODO: no comment needed :)
+	pixelArray[x][y] = pixel;
 }
 
 void IntensityImageStudent::setPixel(int i, Intensity pixel) {
@@ -66,9 +70,10 @@ void IntensityImageStudent::setPixel(int i, Intensity pixel) {
 }
 
 Intensity IntensityImageStudent::getPixel(int x, int y) const {
-	int throwError = 0, e = 1 / throwError;
+	//int throwError = 0, e = 1 / throwError;
 	//TODO: no comment needed :)
-	return 0;
+	//return 0;
+	return pixelArray[x][y];
 }
 
 Intensity IntensityImageStudent::getPixel(int i) const {

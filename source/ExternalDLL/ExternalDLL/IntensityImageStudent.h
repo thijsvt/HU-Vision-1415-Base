@@ -23,5 +23,6 @@ public:
 	Intensity getPixel(int i) const;
 
 private:
-	int *ptr;
+	Intensity **pixelArray;
+
 };

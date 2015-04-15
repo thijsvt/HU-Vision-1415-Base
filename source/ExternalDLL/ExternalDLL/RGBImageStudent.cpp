@@ -8,15 +8,18 @@ RGBImageStudent::RGBImageStudent() : RGBImage() {
 RGBImageStudent::RGBImageStudent(const RGBImageStudent &other) : RGBImage(other.getWidth(), other.getHeight()) {
 	int throwError = 0, e = 1 / throwError;
 	//TODO: Create a copy from the other object
-	ptr = new int;
-	*ptr = *other.ptr;
-	// found solution at : http://www.tutorialspoint.com/cplusplus/cpp_copy_constructor.htm
+	
 }
 
 
 RGBImageStudent::RGBImageStudent(const int width, const int height) : RGBImage(width, height) {
-	int throwError = 0, e = 1 / throwError;
+	//int throwError = 0, e = 1 / throwError;
 	//TODO: Initialize pixel storage
+	pixelArray = new RGB*[width];
+
+	for (auto x = 0; x < width; x++){
+		pixelArray[x] = new RGB[height];
+	}
 }
 
 RGBImageStudent::~RGBImageStudent() {
@@ -37,8 +40,9 @@ void RGBImageStudent::set(const RGBImageStudent &other) {
 }
 
 void RGBImageStudent::setPixel(int x, int y, RGB pixel) {
-	int throwError = 0, e = 1 / throwError;
+	//int throwError = 0, e = 1 / throwError;
 	//TODO: no comment needed :)
+	pixelArray[x][y] = pixel;
 }
 
 void RGBImageStudent::setPixel(int i, RGB pixel) {
@@ -67,9 +71,10 @@ void RGBImageStudent::setPixel(int i, RGB pixel) {
 }
 
 RGB RGBImageStudent::getPixel(int x, int y) const {
-	int throwError = 0, e = 1 / throwError;
+	//int throwError = 0, e = 1 / throwError;
 	//TODO: no comment needed :)
-	return 0;
+	//return 0;
+	return pixelArray[x][y];
 }
 
 RGB RGBImageStudent::getPixel(int i) const {
