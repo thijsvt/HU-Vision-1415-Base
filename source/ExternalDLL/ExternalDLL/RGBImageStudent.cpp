@@ -8,7 +8,7 @@ RGBImageStudent::RGBImageStudent() : RGBImage() {
 RGBImageStudent::RGBImageStudent(const RGBImageStudent &other) : RGBImage(other.getWidth(), other.getHeight()) {
 	int throwError = 0, e = 1 / throwError;
 	//TODO: Create a copy from the other object
-	pixelArrayCopy = pixelArray;
+	set(other);
 }
 
 
@@ -32,16 +32,48 @@ RGBImageStudent::~RGBImageStudent() {
 }
 
 void RGBImageStudent::set(const int width, const int height) {
+	for (int x = 0; x < getWidth(); x++){
+		delete pixelArray[x];
+	}
+	delete pixelArray;
+
 	RGBImage::set(width, height);
-	int throwError = 0, e = 1 / throwError;
+
+	pixelArray = new RGB*[width];
+
+	for (auto x = 0; x < width; x++){
+		pixelArray[x] = new RGB[height];
+	}
+
+	//int throwError = 0, e = 1 / throwError;
 	//TODO: resize or create a new pixel storage (Don't forget to delete the old storage)
 }
 
 void RGBImageStudent::set(const RGBImageStudent &other) {
-	RGBImage::set(other.getWidth(), other.getHeight());
-	int throwError = 0, e = 1 / throwError;
+	//int throwError = 0, e = 1 / throwError;
 	//TODO: resize or create a new pixel storage and copy the object (Don't forget to delete the old storage)
+	// this function was explained by daniel van den berg. (thanks alot!) 
+	for (int x = 0; x < getWidth(); x++){
+		delete pixelArray[x];
+	}
+	delete pixelArray;
+	RGBImageStudent::set(other.getWidth(), other.getHeight()); //create the new one
+
+	int width = other.getWidth(); // get the width
+	int height = other.getHeight(); // get the heigth
+	pixelArray = new RGB*[width];
+	for (int x = 0; x < width; x++){
+		pixelArray[x] = new RGB[height];
+	}
+
+	for (int x = 0; x < getWidth(); x++){
+		for (int y = 0; y < getHeight(); y++){
+			pixelArray[x][y] = other.getPixel(x, y);
+		}
+	}
 }
+
+	
 
 void RGBImageStudent::setPixel(int x, int y, RGB pixel) {
 	//int throwError = 0, e = 1 / throwError;
