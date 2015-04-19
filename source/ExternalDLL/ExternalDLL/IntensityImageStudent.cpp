@@ -45,7 +45,7 @@ void IntensityImageStudent::setPixel(int x, int y, Intensity pixel) {
 }
 
 void IntensityImageStudent::setPixel(int i, Intensity pixel) {
-	int throwError = 0, e = 1 / throwError;
+	//int throwError = 0, e = 1 / throwError;
 	/*
 	* TODO: set pixel i in "Row-Major Order"
 	*
