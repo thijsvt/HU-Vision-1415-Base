@@ -32,7 +32,7 @@ IntensityImageStudent::~IntensityImageStudent() {
 void IntensityImageStudent::set(const int width, const int height) {
 	//int throwError = 0, e = 1 / throwError;
 	//TODO: resize or create a new pixel storage (Don't forget to delete the old storage)
-	for (int x = 0; x < getWidth(); x++){
+	for (auto x = 0; x < getWidth(); x++){
 		delete pixelArray[x];
 	}
 	delete pixelArray;
@@ -44,7 +44,7 @@ void IntensityImageStudent::set(const int width, const int height) {
 }
 
 void IntensityImageStudent::set(const IntensityImageStudent &other) {
-	for (int x = 0; x < getWidth(); x++){
+	for (auto x = 0; x < getWidth(); x++){
 		delete pixelArray[x];
 	}
 	delete pixelArray;
@@ -105,7 +105,7 @@ Intensity IntensityImageStudent::getPixel(int x, int y) const {
 }
 
 Intensity IntensityImageStudent::getPixel(int i) const {
-	int throwError = 0, e = 1 / throwError;
+	//int throwError = 0, e = 1 / throwError;
 	//TODO: see setPixel(int i, RGB pixel)
 	//return 0;
 	return pixelArray[i % getWidth()][i / getWidth()];
