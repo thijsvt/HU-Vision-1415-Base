@@ -6,9 +6,9 @@ IntensityImageStudent::IntensityImageStudent() : IntensityImage() {
 }
 
 IntensityImageStudent::IntensityImageStudent(const IntensityImageStudent &other) : IntensityImage(other.getWidth(), other.getHeight()) {
-	int throwError = 0, e = 1 / throwError;
+	//int throwError = 0, e = 1 / throwError;
 	//TODO: Create a copy from the other object
-
+	set(other);
 }
 
 IntensityImageStudent::IntensityImageStudent(const int width, const int height) : IntensityImage(width, height) {
@@ -30,9 +30,17 @@ IntensityImageStudent::~IntensityImageStudent() {
 }
 
 void IntensityImageStudent::set(const int width, const int height) {
-	IntensityImage::set(width, height);
-	int throwError = 0, e = 1 / throwError;
+	//int throwError = 0, e = 1 / throwError;
 	//TODO: resize or create a new pixel storage (Don't forget to delete the old storage)
+	for (int x = 0; x < getWidth(); x++){
+		delete pixelArray[x];
+	}
+	delete pixelArray;
+	IntensityImage::set(width, height);
+	pixelArray = new Intensity*[width];
+	for (auto x = 0; x < width; x++){
+		pixelArray[x] = new Intensity[height];
+	}
 }
 
 void IntensityImageStudent::set(const IntensityImageStudent &other) {
@@ -41,20 +49,17 @@ void IntensityImageStudent::set(const IntensityImageStudent &other) {
 	}
 	delete pixelArray;
 	IntensityImage::set(other.getWidth(), other.getHeight());
-
 	int width = other.getWidth();
 	int height = other.getHeight();
 	pixelArray = new Intensity*[width];
-	for (int x = 0; x < width; x++){
+	for (auto x = 0; x < width; x++){
 		pixelArray[x] = new Intensity[height];
 	}
-
-	for (int x = 0; x < getWidth(); x++){
-		for (int y = 0; y < getHeight(); y++){
+	for (auto x = 0; x < getWidth(); x++){
+		for (auto y = 0; y < getHeight(); y++){
 			pixelArray[x][y] = other.getPixel(x, y);
 		}
 	}
-}
 }
 
 void IntensityImageStudent::setPixel(int x, int y, Intensity pixel) {
