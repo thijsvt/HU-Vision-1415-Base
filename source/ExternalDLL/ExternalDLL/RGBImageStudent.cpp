@@ -8,7 +8,7 @@ RGBImageStudent::RGBImageStudent() : RGBImage() {
 RGBImageStudent::RGBImageStudent(const RGBImageStudent &other) : RGBImage(other.getWidth(), other.getHeight()) {
 	int throwError = 0, e = 1 / throwError;
 	//TODO: Create a copy from the other object
-	
+	pixelArrayCopy = pixelArray;
 }
 
 
@@ -23,8 +23,12 @@ RGBImageStudent::RGBImageStudent(const int width, const int height) : RGBImage(w
 }
 
 RGBImageStudent::~RGBImageStudent() {
-	int throwError = 0, e = 1 / throwError;
+	//int throwError = 0, e = 1 / throwError;
 	//TODO: delete allocated objects
+	for (int x = 0; x < getWidth(); x++){
+		delete pixelArray[x];
+	}
+	delete pixelArray;
 }
 
 void RGBImageStudent::set(const int width, const int height) {
@@ -46,7 +50,7 @@ void RGBImageStudent::setPixel(int x, int y, RGB pixel) {
 }
 
 void RGBImageStudent::setPixel(int i, RGB pixel) {
-	int throwError = 0, e = 1 / throwError;
+	//int throwError = 0, e = 1 / throwError;
 	/*
 	* TODO: set pixel i in "Row-Major Order"
 	*
@@ -68,9 +72,9 @@ void RGBImageStudent::setPixel(int i, RGB pixel) {
 	* 7		7
 	* 8		8
 	*/
-	int x = i % getWidth();
-	int y = i / getWidth();
-	setPixel(x, y, pixel);
+	int x = i % getWidth(); //bereken de lengte met het restgetal van i
+	int y = i / getWidth(); // bereken de breedte met de deling van y
+	setPixel(x, y, pixel); // set de pixel 
 }
 
 RGB RGBImageStudent::getPixel(int x, int y) const {
@@ -81,7 +85,8 @@ RGB RGBImageStudent::getPixel(int x, int y) const {
 }
 
 RGB RGBImageStudent::getPixel(int i) const {
-	int throwError = 0, e = 1 / throwError;
+	//int throwError = 0, e = 1 / throwError;
 	//TODO: see setPixel(int i, RGB pixel)
-	return 0;
+	//bereken de lengte met het restgetal van i
+	return pixelArray[i %getWidth()][i / getWidth()];
 }

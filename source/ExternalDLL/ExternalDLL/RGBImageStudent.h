@@ -24,4 +24,5 @@ public:
 	RGB getPixel(int i) const;
 private:
 	RGB **pixelArray;
+	RGB **pixelArrayCopy;
 };
