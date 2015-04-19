@@ -72,15 +72,9 @@ void RGBImageStudent::setPixel(int i, RGB pixel) {
 	* 7		7
 	* 8		8
 	*/
-<<<<<<< HEAD
 	int x = i % getWidth(); //bereken de lengte met het restgetal van i
 	int y = i / getWidth(); // bereken de breedte met de deling van y
 	setPixel(x, y, pixel); // set de pixel 
-=======
-	int x = i % getWidth(); 
-	int y = i / getWidth();
-	setPixel(x, y, pixel);
->>>>>>> origin/master
 }
 
 RGB RGBImageStudent::getPixel(int x, int y) const {
