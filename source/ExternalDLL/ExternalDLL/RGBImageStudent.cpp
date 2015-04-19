@@ -52,9 +52,9 @@ void RGBImageStudent::setPixel(int i, RGB pixel) {
 	*
 	*
 	* Original 2d image (values):
-	* 9 1 2
-	* 4 3 5
-	* 8 7 8
+	*  9 1 2
+	*  4 3 5
+	*  8 7 8
 	*
 	* 1d representation (i, value):
 	* i		value
@@ -68,7 +68,7 @@ void RGBImageStudent::setPixel(int i, RGB pixel) {
 	* 7		7
 	* 8		8
 	*/
-	int x = i % getWidth();
+	int x = i % getWidth(); 
 	int y = i / getWidth();
 	setPixel(x, y, pixel);
 }
