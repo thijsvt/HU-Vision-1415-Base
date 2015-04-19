@@ -51,6 +51,17 @@ void IntensityImageStudent::set(const IntensityImageStudent &other) {
 	}
 	delete pixelArray;
 	IntensityImage::set(other.getWidth(), other.getHeight());
+	int width = other.getWidth();
+	int height = other.getHeight();
+	pixelArray = new Intensity*[width];
+	for (auto x = 0; x < width; x++){
+		pixelArray[x] = new Intensity[height];
+	}
+	for (auto x = 0; x < getWidth(); x++){
+		for (auto y = 0; y < getHeight(); y++){
+			pixelArray[x][y] = other.getPixel(x, y);
+		}
+	}
 }
 
 void IntensityImageStudent::setPixel(int x, int y, Intensity pixel) {
