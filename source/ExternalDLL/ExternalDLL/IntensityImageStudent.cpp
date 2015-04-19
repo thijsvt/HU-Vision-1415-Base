@@ -26,6 +26,7 @@ IntensityImageStudent::~IntensityImageStudent() {
 	for (auto x = 0; x < getWidth(); x++){
 		delete pixelArray[x];
 	}
+	delete pixelArray;
 }
 
 void IntensityImageStudent::set(const int width, const int height) {
