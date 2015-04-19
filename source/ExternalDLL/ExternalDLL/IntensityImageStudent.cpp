@@ -96,7 +96,7 @@ Intensity IntensityImageStudent::getPixel(int x, int y) const {
 }
 
 Intensity IntensityImageStudent::getPixel(int i) const {
-	int throwError = 0, e = 1 / throwError;
+	//int throwError = 0, e = 1 / throwError;
 	//TODO: see setPixel(int i, RGB pixel)
 	//return 0;
 	return pixelArray[i % getWidth()][i / getWidth()];
