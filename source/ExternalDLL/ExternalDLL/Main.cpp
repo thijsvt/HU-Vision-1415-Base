@@ -15,7 +15,7 @@ bool executeSteps(DLLExecution * executor);
 
 int main(int argc, char * argv[]) {
 
-	ImageFactory::setImplementation(ImageFactory::DEFAULT);
+	//ImageFactory::setImplementation(ImageFactory::DEFAULT);
 	ImageFactory::setImplementation( ImageFactory::STUDENT); // uitcommente als je de normale functies wil gebruiken! nu gebruikt hij jou code en paden
 
 

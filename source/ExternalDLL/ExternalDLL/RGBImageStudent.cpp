@@ -1,7 +1,7 @@
 #include "RGBImageStudent.h"
 
 RGBImageStudent::RGBImageStudent() : RGBImage() {
-	int throwError = 0, e = 1 / throwError; //Throws error without the need to include a header
+	//int throwError = 0, e = 1 / throwError; //Throws error without the need to include a header
 	//TODO: Nothing
 }
 
@@ -26,16 +26,16 @@ RGBImageStudent::~RGBImageStudent() {
 	//int throwError = 0, e = 1 / throwError;
 	//TODO: delete allocated objects
 	for (int x = 0; x < getWidth(); x++){
-		delete pixelArray[x];
+		delete [] pixelArray[x];
 	}
-	delete pixelArray;
+	delete [] pixelArray;
 }
 
 void RGBImageStudent::set(const int width, const int height) {
 	for (int x = 0; x < getWidth(); x++){
-		delete pixelArray[x];
+		delete [] pixelArray[x];
 	}
-	delete pixelArray;
+	delete [] pixelArray;
 
 	RGBImage::set(width, height);
 
@@ -54,9 +54,9 @@ void RGBImageStudent::set(const RGBImageStudent &other) {
 	//TODO: resize or create a new pixel storage and copy the object (Don't forget to delete the old storage)
 	// this function was explained by daniel van den berg. (thanks alot!) 
 	for (int x = 0; x < getWidth(); x++){
-		delete pixelArray[x];
+		delete [] pixelArray[x];
 	}
-	delete pixelArray;
+	delete [] pixelArray;
 	RGBImageStudent::set(other.getWidth(), other.getHeight()); //create the new one
 
 	int width = other.getWidth(); // get the width

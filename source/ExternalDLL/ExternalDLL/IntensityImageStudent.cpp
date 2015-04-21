@@ -1,7 +1,7 @@
 #include "IntensityImageStudent.h"
 
 IntensityImageStudent::IntensityImageStudent() : IntensityImage() {
-	int throwError = 0, e = 1 / throwError; //Throws error without the need to include a header
+	//int throwError = 0, e = 1 / throwError; //Throws error without the need to include a header
 	//TODO: Nothing
 }
 
@@ -26,16 +26,16 @@ IntensityImageStudent::~IntensityImageStudent() {
 	for (auto x = 0; x < getWidth(); x++){
 		delete pixelArray[x];
 	}
-	delete pixelArray;
+	delete [] pixelArray;
 }
 
 void IntensityImageStudent::set(const int width, const int height) {
 	//int throwError = 0, e = 1 / throwError;
 	//TODO: resize or create a new pixel storage (Don't forget to delete the old storage)
 	for (auto x = 0; x < getWidth(); x++){
-		delete pixelArray[x];
+		delete [] pixelArray[x];
 	}
-	delete pixelArray;
+	delete [] pixelArray;
 	IntensityImage::set(width, height);
 	pixelArray = new Intensity*[width];
 	for (auto x = 0; x < width; x++){
@@ -45,7 +45,7 @@ void IntensityImageStudent::set(const int width, const int height) {
 
 void IntensityImageStudent::set(const IntensityImageStudent &other) {
 	for (auto x = 0; x < getWidth(); x++){
-		delete pixelArray[x];
+		delete [] pixelArray[x];
 	}
 	delete pixelArray;
 	IntensityImage::set(other.getWidth(), other.getHeight());
