@@ -24,7 +24,7 @@ IntensityImageStudent::~IntensityImageStudent() {
 	//int throwError = 0, e = 1 / throwError;
 	//TODO: delete allocated objects
 	for (auto x = 0; x < getWidth(); x++){
-		delete pixelArray[x];
+		delete [] pixelArray[x];
 	}
 	delete [] pixelArray;
 }
@@ -47,7 +47,7 @@ void IntensityImageStudent::set(const IntensityImageStudent &other) {
 	for (auto x = 0; x < getWidth(); x++){
 		delete [] pixelArray[x];
 	}
-	delete pixelArray;
+	delete [] pixelArray;
 	IntensityImage::set(other.getWidth(), other.getHeight());
 	int width = other.getWidth();
 	int height = other.getHeight();
