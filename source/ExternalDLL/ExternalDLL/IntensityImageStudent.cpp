@@ -33,7 +33,6 @@ void IntensityImageStudent::set(const int width, const int height) {
 	//int throwError = 0, e = 1 / throwError;
 	//TODO: resize or create a new pixel storage (Don't forget to delete the old storage)
 	pixelArrayCopy = new Intensity*[width];
-
 	for(auto x = 0; x < width; x++){
 		pixelArrayCopy[x] = new Intensity[height];
 	}
@@ -51,9 +50,7 @@ void IntensityImageStudent::set(const int width, const int height) {
 		delete[] pixelArray[x];
 	}
 	delete[] pixelArray;
-
 	pixelArray = pixelArray;
-
 	IntensityImage::set(width, height);
 }
 
