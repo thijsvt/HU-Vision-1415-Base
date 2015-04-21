@@ -30,44 +30,48 @@ IntensityImageStudent::~IntensityImageStudent() {
 }
 
 void IntensityImageStudent::set(const int width, const int height) {
-	//int throwError = 0, e = 1 / throwError;
-	//TODO: resize or create a new pixel storage (Don't forget to delete the old storage)
-	pixelArrayCopy = new Intensity*[width];
-	for(auto x = 0; x < width; x++){
-		pixelArrayCopy[x] = new Intensity[height];
-	}
-	for (int p = 0; p < getWidth(); p++){
-		for (int y = 0; y < getHeight(); y++){
-			if (p > width || y > height){
-				//afvangen of hij niet groter is
-			}
-			else{
-				pixelArrayCopy[p][y] = pixelArray[p][y];
-			}
+	if (pixelArray == nullptr){
+		pixelArray = new Intensity*[width];
+		for (auto x = 0; x < width; x++){
+			pixelArray[x] = new Intensity[height];
 		}
 	}
-	for (auto x = 0; x < getWidth(); x++){
-		delete[] pixelArray[x];
+	else{
+		pixelArrayCopy = new Intensity*[width];
+		for (auto x = 0; x < width; x++){
+			pixelArrayCopy[x] = new Intensity[height];
+		}
+		for (int p = 0; p < getWidth(); p++){
+			for (int y = 0; y < getHeight(); y++){
+				if (p > width || y > height){
+					//afvangen of hij niet groter is
+				}
+				else{
+					pixelArrayCopy[p][y] = pixelArray[p][y];
+				}
+			}
+		}
+		for (int x = 0; x < getWidth(); x++){
+			delete[] pixelArray[x];
+		}
+		delete[] pixelArray;
+		pixelArray = pixelArrayCopy; //pointer van pixelarray naar pixelarracopy laten wijzen
 	}
-	delete[] pixelArray;
-	pixelArray = pixelArray;
-	IntensityImage::set(width, height);
+	IntensityImage::set(width, height); // deze moet altijd
 }
 
 void IntensityImageStudent::set(const IntensityImageStudent &other) {
-	for (auto x = 0; x < getWidth(); x++){
-		delete [] pixelArray[x];
+	//int throwError = 0, e = 1 / throwError;
+	//TODO: resize or create a new pixel storage and copy the object (Don't forget to delete the old storage)
+	// this function was explained by daniel van den berg. (thanks alot!) 
+	for (int x = 0; x < getWidth(); x++){
+		delete[] pixelArray[x];
 	}
-	delete [] pixelArray;
-	IntensityImage::set(other.getWidth(), other.getHeight());
-	int width = other.getWidth();
-	int height = other.getHeight();
-	pixelArray = new Intensity*[width];
-	for (auto x = 0; x < width; x++){
-		pixelArray[x] = new Intensity[height];
-	}
-	for (auto x = 0; x < getWidth(); x++){
-		for (auto y = 0; y < getHeight(); y++){
+	delete[] pixelArray;
+	IntensityImageStudent::set(other.getWidth(), other.getHeight()); //create the new one
+	//weggooien en nieuw geheugen aanmaken wordt al gedaan hierboven.
+	for (int x = 0; x < getWidth(); x++){
+		for (int y = 0; y < getHeight(); y++){
 			pixelArray[x][y] = other.getPixel(x, y);
 		}
 	}

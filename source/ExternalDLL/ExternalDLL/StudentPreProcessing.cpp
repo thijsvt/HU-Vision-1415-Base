@@ -3,6 +3,8 @@
 
 IntensityImage * StudentPreProcessing::stepToIntensityImage(const RGBImage &image) const {
 	return nullptr;
+	//maak een nieuwe opbject aan voor intensity image
+	//bereken hier rgb naar intensity
 }
 
 IntensityImage * StudentPreProcessing::stepScaleImage(const IntensityImage &image) const {
