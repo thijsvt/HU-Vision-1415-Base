@@ -32,18 +32,32 @@ RGBImageStudent::~RGBImageStudent() {
 }
 
 void RGBImageStudent::set(const int width, const int height) {
+	pixelArrayCopy = new RGB*[width];
+
+	for (auto x = 0; x < width; x++){
+		pixelArrayCopy[x] = new RGB[height];
+	}
+
+	for (int p = 0; p < getWidth(); p++){
+		for (int y = 0; y < getHeight(); y++){
+			if (p > width || y > height){
+				//afvangen of hij niet groter is
+			}
+			else{
+				pixelArrayCopy[p][y] = pixelArray[p][y];
+			}
+		}
+	}
 	for (int x = 0; x < getWidth(); x++){
 		delete [] pixelArray[x];
 	}
 	delete [] pixelArray;
 
+	pixelArray = pixelArrayCopy; //pointer van pixelarray naar pixelarracopy laten wijzen
+
 	RGBImage::set(width, height);
 
-	pixelArray = new RGB*[width];
 
-	for (auto x = 0; x < width; x++){
-		pixelArray[x] = new RGB[height];
-	}
 
 	//int throwError = 0, e = 1 / throwError;
 	//TODO: resize or create a new pixel storage (Don't forget to delete the old storage)
@@ -122,3 +136,6 @@ RGB RGBImageStudent::getPixel(int i) const {
 	//bereken de lengte met het restgetal van i
 	return pixelArray[i %getWidth()][i / getWidth()];
 }
+
+// bereken met RGB wat er nodig is van kleur naar grijs en stuur het dan door.
+// opvragen intesity image factory 

@@ -24,5 +24,6 @@ public:
 
 private:
 	Intensity **pixelArray;
+	Intensity **pixelArrayCopy;
 
 };

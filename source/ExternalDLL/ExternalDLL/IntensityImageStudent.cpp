@@ -32,15 +32,29 @@ IntensityImageStudent::~IntensityImageStudent() {
 void IntensityImageStudent::set(const int width, const int height) {
 	//int throwError = 0, e = 1 / throwError;
 	//TODO: resize or create a new pixel storage (Don't forget to delete the old storage)
+	pixelArrayCopy = new Intensity*[width];
+
+	for(auto x = 0; x < width; x++){
+		pixelArrayCopy[x] = new Intensity[height];
+	}
+	for (int p = 0; p < getWidth(); p++){
+		for (int y = 0; y < getHeight(); y++){
+			if (p > width || y > height){
+				//afvangen of hij niet groter is
+			}
+			else{
+				pixelArrayCopy[p][y] = pixelArray[p][y];
+			}
+		}
+	}
 	for (auto x = 0; x < getWidth(); x++){
-		delete [] pixelArray[x];
+		delete[] pixelArray[x];
 	}
-	delete [] pixelArray;
+	delete[] pixelArray;
+
+	pixelArray = pixelArray;
+
 	IntensityImage::set(width, height);
-	pixelArray = new Intensity*[width];
-	for (auto x = 0; x < width; x++){
-		pixelArray[x] = new Intensity[height];
-	}
 }
 
 void IntensityImageStudent::set(const IntensityImageStudent &other) {
