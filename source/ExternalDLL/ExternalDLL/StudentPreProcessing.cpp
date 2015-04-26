@@ -2,29 +2,19 @@
 
 
 IntensityImage * StudentPreProcessing::stepToIntensityImage(const RGBImage &image) const {
-	return nullptr;
-	IntensityImage* newObject = new IntensityImageStudent(image.getWidth,image.getHeight);
+	IntensityImage* newObject = new IntensityImageStudent(image.getWidth(), image.getHeight());
 
+	for (int x = 0; x < image.getWidth(); x++){
+		for (int y = 0; y < image.getHeight(); y++){
+			RGB pixel = image.getPixel(x, y); // wat voor waarde moet dit zijn?
+			Intensity intensityPixel = Intensity(0.299*pixel.r + 0.587*pixel.g + 0.114*pixel.b);
+			newObject->setPixel(x, y, intensityPixel);
 
-	for (int x = 0; x < image.getWidth; x++){
-		for (int y = 0; y < image.getHeight; y++){
-			double = image.getPixel(x, y); // wat voor waarde moet dit zijn?
-			if (){ //check hier of het rood is
-			}
-			else if(){ //check hier of het groen is
-
-			}
-			else if (){ //check hier of het blauw is
-			}
-			else{ // hier is het dus een andere waarde
-			}
-
-
-
-			}
+			//formule gebaseerd op http://www.songho.ca/dsp/luminance/luminance.html
 		}
-
 	}
+
+	return newObject;
 
 
 	// hoe haal je R G B uit de image
