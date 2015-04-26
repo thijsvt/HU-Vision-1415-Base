@@ -7,7 +7,7 @@ IntensityImage * StudentPreProcessing::stepToIntensityImage(const RGBImage &imag
 	for (int x = 0; x < image.getWidth(); x++){
 		for (int y = 0; y < image.getHeight(); y++){
 			RGB pixel = image.getPixel(x, y); // wat voor waarde moet dit zijn?
-			Intensity intensityPixel = Intensity(0.299*pixel.r + 0.587*pixel.g + 0.114*pixel.b);
+			Intensity intensityPixel = Intensity(0.2989*pixel.r + 0.5870*pixel.g + 0.1140*pixel.b);
 			newObject->setPixel(x, y, intensityPixel);
 
 			//formule gebaseerd op http://www.songho.ca/dsp/luminance/luminance.html
