@@ -10,8 +10,7 @@
 #include "Point2D.h"
 #include <vector>
 
-class Feature
-{
+class Feature{
 private:
 	int id;
 	std::vector<Point2D<double>> points;
