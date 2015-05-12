@@ -51,7 +51,7 @@ bool StudentLocalization::stepFindNoseMouthAndChin(const IntensityImage &image, 
 	for (auto &e : correctPoints){
 		std::cout << e << std::endl;
 	}
-	Point2D<double> bottomNose{ static_cast<double>(headTopX), correctPoints[0] + ((correctPoints[1] - correctPoints[0]) / 2.0) };
+	Point2D<double> bottomNose{ static_cast<double>(headTopX), correctPoints[0] + ((correctPoints[1] - correctPoints[0]) / 2.0) }; // elke 2 punten bijelkaar is een piek. 
 	Point2D<double> topMouth{ static_cast<double>(headTopX), correctPoints[2] + ((correctPoints[3] - correctPoints[2]) / 2.0) };
 	Point2D<double> bottomMouth{ static_cast<double>(headTopX), correctPoints[4] + ((correctPoints[5] - correctPoints[4]) / 2.0) };
 	Point2D<double> middleMouth{ static_cast<double>(headTopX), topMouth.getY() + ((bottomMouth.getY() - topMouth.getY()) / 2.0) };
@@ -71,6 +71,7 @@ bool StudentLocalization::stepFindNoseMouthAndChin(const IntensityImage &image, 
 	features.putFeature(mouthBottom);
 	features.putFeature(mouthMiddle);
 	features.putFeature(chinCenter);
+	return false;
 }
 
 bool StudentLocalization::stepFindChinContours(const IntensityImage &image, FeatureMap &features) const {
