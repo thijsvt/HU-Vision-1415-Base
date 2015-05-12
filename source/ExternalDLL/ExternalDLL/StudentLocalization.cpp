@@ -40,9 +40,9 @@ bool StudentLocalization::stepFindNoseMouthAndChin(const IntensityImage &image, 
 						if (middleVerticalStrip[someY] > 0 && middleVerticalStrip[someY - 1] == 0){
 							correctPoints[correctPoints.size() - 2] = someY;
 							break;
-							}
-						--someY;
 						}
+						--someY;
+					}
 						std::cout << correctPoints[correctPoints.size() - 2] << ',' << correctPoints[correctPoints.size() - 1] << std::endl;
 				}
 			}
@@ -71,7 +71,7 @@ bool StudentLocalization::stepFindNoseMouthAndChin(const IntensityImage &image, 
 	features.putFeature(mouthBottom);
 	features.putFeature(mouthMiddle);
 	features.putFeature(chinCenter);
-	return false;
+	return true;
 }
 
 bool StudentLocalization::stepFindChinContours(const IntensityImage &image, FeatureMap &features) const {
