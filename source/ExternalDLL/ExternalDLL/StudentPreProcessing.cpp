@@ -29,6 +29,17 @@ IntensityImage * StudentPreProcessing::stepScaleImage(const IntensityImage &imag
 }
 
 IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &image) const {
+	// eerst noise reduction
+	// dan edge enhanchement
+	// en dan edge localisation
+	// maak gebruik van laplacian (zie neighbourhoud operations 170) (werkt samen met guaccian)
+	// Pas daarna een LOG filter toe of als je wilt heb je DOG
+	// Handige links : http://homepages.inf.ed.ac.uk/rbf/HIPR2/log.htm 
+	// handige links http://softwarebydefault.com/tag/laplacian-of-gaussian/
+
+
+
+	
 	return nullptr;
 }
 
