@@ -8,6 +8,9 @@
 #include "PreProcessing.h"
 #include "intensityImageStudent.h"
 #include "intensityImage.h"
+#include <math.h>
+#define _USE_MATH_DEFINES
+#include <cmath> 
 
 class StudentPreProcessing : public PreProcessing {
 public:
@@ -17,4 +20,6 @@ public:
 	IntensityImage * stepThresholding(const IntensityImage &image) const;
 private:
 	RGBImage *RGBArray;
+	RGB **pixelArrayTwo;
+	RGB **pixelArrayantwoord;
 };
