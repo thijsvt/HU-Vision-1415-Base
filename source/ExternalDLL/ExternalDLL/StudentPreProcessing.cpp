@@ -160,7 +160,7 @@ IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &im
 		{
 			//zet de pixel waarde op 255 of 0 op basis van de berekingen.
 			// ptr is positie, kan zijn dat de getpixel inverted wil hebben.
-			valueImage->setPixel(ptr, ((0xFF & image.getPixel(ptr) >= threshold) ? 255 : 0) );
+			valueImage->setPixel(ptr, ((0xFF & image.getPixel(ptr) >= threshold) ? 0 : 255) );
 			ptr++;
 		}
 	}
