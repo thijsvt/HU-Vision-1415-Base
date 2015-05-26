@@ -108,13 +108,13 @@ IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &im
 	//The simplest thresholding methods replace each pixel in an image with a black pixel if the image intensity I_{i,j} is less than some fixed constant T (that is, I_{i,j}<T), or a white pixel if the image intensity is greater than that constant. In the example image on the right, this results in the dark tree becoming completely black, and the white snow becoming complete white.
 	// http://en.wikipedia.org/wiki/Otsu%27s_method
 	// http://www.labbookpages.co.uk/software/imgProc/otsuThreshold.html
-	int histData[256];
+	int histData[256]; // zijn de RGB waardes oko wel intesity 
 	int threshold;
 	int ptr = 0;
 	int maxLevelValue = 0;
 	int aantalpixels = image.getHeight * image.getWidth;
 	while (ptr < aantalpixels){
-		int h = 0XFF & valueImage[ptr];
+		int h = 0XFF & image.getPixel(ptr);
 		histData[h]++;
 		if (histData[h] > maxLevelValue) maxLevelValue = histData[h];
 		ptr++;
@@ -123,7 +123,7 @@ IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &im
 	
 	float sum = 0;
 	for (int t = 0; t < 256; t++){
-		// calculate histogram
+		sum += t*histData[t];
 
 	}
 
@@ -135,9 +135,25 @@ IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &im
 	int threshold = 0;
 
 	for (int t = 0; t < 256; t++){
+		wB += histData[t];
+		if (wB == 0){
+			continue;
+		}
+		wF = aantalpixels - wB;
+		if (wF == 0){
+			break;
+		}
+		sumB += (float)(t * histData[t]);
+		float mB = sumB / wB;
+		float mF = (sum - sumB) / wF;
 
+		float varBetween = (float)wB * (float)wF * (mB - mF) * (mB - mF);
+
+		if (varBetween > varMax){
+			varMax = varBetween;
+			threshold = t;
+		}
 	}
-	
 
 	return valueImage;
 }
