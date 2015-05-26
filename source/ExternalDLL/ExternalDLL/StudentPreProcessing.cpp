@@ -57,8 +57,8 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &i
 	// stap 2. Ga door met aan de threshold kloten totdat de image er beter uitziet. 
 	//(mogelijk heid om de image nog beter te krijgen is er door de waardes aan te gaan passen zie kjeld voor meer info)
 
-	auto valueImage = new IntensityImageStudent(image.getWidth()-4, image.getHeight()-4);
-	auto valueImageLap = new IntensityImageStudent(valueImage->getWidth() - 4, valueImage->getHeight() - 4);
+	auto valueImage = ImageFactory::newIntensityImage(image.getWidth()-4, image.getHeight()-4);
+	auto valueImageLap = ImageFactory::newIntensityImage(image.getWidth()-4, image.getHeight()-4);
 	// -4 bij de value image om te zorgen dat de kernel niet buiten de rand van de image valt.
 	// x,y = 2 om hier aan te kunnen voldoen. zie alfbeelding Jospixeluitleg.png
 	for (int x = 2; x < image.getWidth()-2; x++){
