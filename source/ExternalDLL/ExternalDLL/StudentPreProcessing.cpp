@@ -132,7 +132,7 @@ IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &im
 	int wF = 0;
 
 	float varMax = 0;
-	int threshold = 0;
+	threshold = 0;
 
 	for (int t = 0; t < 256; t++){
 		wB += histData[t];
