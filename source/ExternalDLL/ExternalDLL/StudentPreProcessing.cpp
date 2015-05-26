@@ -104,5 +104,21 @@ IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &im
 			valueImage->setPixel(i, j, image.getPixel(i, j));
 		}
 	}
+
+	//The simplest thresholding methods replace each pixel in an image with a black pixel if the image intensity I_{i,j} is less than some fixed constant T (that is, I_{i,j}<T), or a white pixel if the image intensity is greater than that constant. In the example image on the right, this results in the dark tree becoming completely black, and the white snow becoming complete white.
+	// http://en.wikipedia.org/wiki/Otsu%27s_method
+	// http://www.labbookpages.co.uk/software/imgProc/otsuThreshold.html
+
+	int aantalpixels = image.getHeight * image.getWidth;
+
+	int sumb = 0;
+	int wb = 0;
+	int wf = 0;
+	int mb;
+	int mf;
+	double max = 0.0;
+	double between = 0.0;
+
+
 	return valueImage;
 }
