@@ -1,4 +1,5 @@
 #include "StudentPreProcessing.h"
+#include "ImageFactory.h"
 
 
 const int StudentPreProcessing::kernel5x5[5][5] =
@@ -98,12 +99,13 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &i
 
 IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &image) const {
 	//threshold pakt de pixel en gooi je in de nieuwe image. 
-	auto valueImage = new IntensityImageStudent(image.getWidth(), image.getHeight());
-	for (int i = 0; i < image.getWidth(); i++){
-		for (int j = 0; j < image.getHeight(); j++){
-			valueImage->setPixel(i, j, image.getPixel(i, j));
-		}
-	}
+	
+	auto valueImage = ImageFactory::newIntensityImage(image.getWidth(), image.getHeight());
+	//for (int i = 0; i < image.getWidth(); i++){
+	//	for (int j = 0; j < image.getHeight(); j++){
+	//		valueImage->setPixel(i, j, image.getPixel(i, j));
+	//	}
+	//}
 
 	//The simplest thresholding methods replace each pixel in an image with a black pixel if the image intensity I_{i,j} is less than some fixed constant T (that is, I_{i,j}<T), or a white pixel if the image intensity is greater than that constant. In the example image on the right, this results in the dark tree becoming completely black, and the white snow becoming complete white.
 	// http://en.wikipedia.org/wiki/Otsu%27s_method
@@ -119,14 +121,11 @@ IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &im
 		if (histData[h] > maxLevelValue) maxLevelValue = histData[h];
 		ptr++;
 	}
-
-	
 	float sum = 0;
 	for (int t = 0; t < 256; t++){
 		sum += t*histData[t];
 
 	}
-
 	float sumB = 0;
 	int wB = 0;
 	int wF = 0;
@@ -154,6 +153,18 @@ IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &im
 			threshold = t;
 		}
 	}
+	if (valueImage != nullptr)
+	{
+		ptr = 0;
+		while (ptr < aantalpixels)
+		{
+			//zet de pixel waarde op 255 of 0 op basis van de berekingen.
+			// ptr is positie, kan zijn dat de getpixel inverted wil hebben.
+			valueImage->setPixel(ptr, ((0xFF & image.getPixel(ptr) >= threshold) ? 255 : 0) );
+			ptr++;
+		}
+	}
 
 	return valueImage;
+	
 }
