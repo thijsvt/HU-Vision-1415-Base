@@ -22,4 +22,5 @@ private:
 	RGBImage *RGBArray;
 	const static int kernel5x5[5][5];
 	const static int LapKernel5x5[5][5];
+
 };
