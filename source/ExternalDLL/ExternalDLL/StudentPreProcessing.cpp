@@ -112,7 +112,7 @@ IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &im
 	int threshold;
 	int ptr = 0;
 	int maxLevelValue = 0;
-	int aantalpixels = image.getHeight * image.getWidth;
+	int aantalpixels = image.getHeight() * image.getWidth();
 	while (ptr < aantalpixels){
 		int h = 0XFF & image.getPixel(ptr);
 		histData[h]++;
