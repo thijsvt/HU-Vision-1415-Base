@@ -2,6 +2,7 @@
 #include "ImageFactory.h"
 
 
+
 const int StudentPreProcessing::kernel5x5[5][5] =
 { { 2, 4, 5, 4, 2 }, // = 17
 { 4, 9, 12, 9, 4 }, 
@@ -41,7 +42,26 @@ IntensityImage * StudentPreProcessing::stepToIntensityImage(const RGBImage &imag
 }
 
 IntensityImage * StudentPreProcessing::stepScaleImage(const IntensityImage &image) const {
-	return nullptr;
+	int acos = cos(0);
+	int asin = sin(0);
+	const int scaleX = 200; // gedefineerd in de opdracht
+	const int scaleY = 200;
+	int bresultaatsin = -asin;
+	int bresultaatcos = -acos;
+
+	for (int x = 0; x < image.getWidth(); x++){
+		for (int y = 0; y < image.getHeight(); y++){
+			x = round((acos + x) + (asin + y));
+			y = round((bresultaatsin + x) + (bresultaatcos + y));
+			if (){
+
+			}
+			else{
+
+			}
+		}
+	}
+	//return nullptr;
 }
 
 IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &image) const {
