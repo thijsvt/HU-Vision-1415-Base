@@ -2,7 +2,6 @@
 #include "ImageFactory.h"
 
 
-
 const int StudentPreProcessing::kernel5x5[5][5] =
 { { 2, 4, 5, 4, 2 }, // = 17
 { 4, 9, 12, 9, 4 }, 
@@ -19,58 +18,43 @@ const int StudentPreProcessing::LapKernel5x5[5][5] =
 { -1, -1, -1, -1, -1 }}; //laplacian kernel is het gewicht altijd 0
 
 IntensityImage * StudentPreProcessing::stepToIntensityImage(const RGBImage &image) const {
+	//formule gebaseerd op http://www.songho.ca/dsp/luminance/luminance.html
 	IntensityImage* newObject = new IntensityImageStudent(image.getWidth(), image.getHeight());
 
 	for (int x = 0; x < image.getWidth(); x++){
 		for (int y = 0; y < image.getHeight(); y++){
 			RGB pixel = image.getPixel(x, y); // wat voor waarde moet dit zijn?
 			Intensity intensityPixel = Intensity(0.2989*pixel.r + 0.5870*pixel.g + 0.1140*pixel.b);
-			newObject->setPixel(x, y, intensityPixel);
-
-			//formule gebaseerd op http://www.songho.ca/dsp/luminance/luminance.html
+			newObject->setPixel(x, y, intensityPixel);		
 		}
 	}
-
 	return newObject;
-
-
-	// hoe haal je R G B uit de image
-
-	//IntensityImageStudent::IntensityImageStudent(image);
-	//maak een nieuwe opbject aan voor intensity image
-	//bereken hier rgb naar intensity
 }
 
 IntensityImage * StudentPreProcessing::stepScaleImage(const IntensityImage &image) const {
 	// gemaakt met hulp van Bart Muelders.
+	//bronnen:
+	//1. slides hu
+	// 2. http://en.wikipedia.org/wiki/Bilinear_interpolation
+	// 3. http://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm
 	auto vergrootObject = ImageFactory::newIntensityImage(image.getWidth(), image.getHeight());
-	const int scaleX = 200; // gedefineerd in de opdracht
-	const int scaleY = 200;
+	const int scaleX = 300; // de groote van de scale ((in de opdracht staat 200x200))
+	const int scaleY = 300;
+	
 	double inputSize = image.getWidth()*image.getHeight(); // gewoon totale grote van de image
 	double realSize = static_cast<double>(scaleX)*static_cast<double>(scaleY); // Static cast om te zorgen dat de ints naar doubles gaan (200*200) 
 	double schaal = 1.0 / sqrt(inputSize / realSize); // berekend de goede schaal
 
 	vergrootObject->set(static_cast<int>(image.getWidth()*schaal), static_cast<int>(image.getHeight()*schaal)); // bereken het nieuwe object in breedte en hoogte
 
-	for (int x = 0; x < vergrootObject->getWidth(); x++){
-		for (int y = 0; y < vergrootObject->getHeight(); y++){
-			double deltaX = x / schaal - floor(x / schaal); // floor is een afronding functie van math die afrond naar beneden
-			double deltaY = y / schaal - floor(y / schaal);
-			// ceil is het tegenovergestelde van floor
-			double J = image.getPixel(floor(x / schaal), floor(y / schaal)) + (image.getPixel(ceil(x / schaal), floor(y / schaal)) - image.getPixel(floor(x / schaal), floor(y / schaal))) * deltaX;
-
-			double T = image.getPixel(floor(x / schaal), ceil(y / schaal)) + (image.getPixel(ceil(x / schaal), ceil(y / schaal)) - image.getPixel(floor(x / schaal), ceil(y / schaal))) * deltaX;
-
-			int uiteindelijkePixel = J + (T - J) * deltaY;
-			vergrootObject->setPixel(x, y, uiteindelijkePixel);
+	for (int x = 0; x < vergrootObject->getWidth(); ++x){
+		for (int y = 0; y < vergrootObject->getHeight(); ++y){
+			auto Xold = round( x / schaal); //nearestneighbour berekening met round om kans op komma getallen te voorkomen. 
+			auto Yold = round( y / schaal); 
+			vergrootObject->setPixel(x, y, image.getPixel(Xold, Yold)); //scale de pixels x,y aan de hand van de oude x en y.
 		}
 	}
 	return vergrootObject;
-	//bronnen:
-	//1. slides hu
-	// 2. http://en.wikipedia.org/wiki/Bilinear_interpolation
-	// 3. http://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm
-	//return nullptr;
 }
 
 IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &image) const {
