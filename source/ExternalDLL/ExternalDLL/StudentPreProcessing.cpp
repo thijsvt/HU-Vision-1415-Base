@@ -42,7 +42,8 @@ IntensityImage * StudentPreProcessing::stepToIntensityImage(const RGBImage &imag
 }
 
 IntensityImage * StudentPreProcessing::stepScaleImage(const IntensityImage &image) const {
-	IntensityImage* vergrootObject = new IntensityImageStudent(image.getWidth(), image.getHeight());
+	// gemaakt met hulp van Bart Muelders.
+	auto vergrootObject = ImageFactory::newIntensityImage(image.getWidth(), image.getHeight());
 	const int scaleX = 200; // gedefineerd in de opdracht
 	const int scaleY = 200;
 	double inputSize = image.getWidth()*image.getHeight(); // gewoon totale grote van de image
