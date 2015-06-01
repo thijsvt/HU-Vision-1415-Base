@@ -42,25 +42,33 @@ IntensityImage * StudentPreProcessing::stepToIntensityImage(const RGBImage &imag
 }
 
 IntensityImage * StudentPreProcessing::stepScaleImage(const IntensityImage &image) const {
-	int acos = cos(0);
-	int asin = sin(0);
+	IntensityImage* vergrootObject = new IntensityImageStudent(image.getWidth(), image.getHeight());
 	const int scaleX = 200; // gedefineerd in de opdracht
 	const int scaleY = 200;
-	int bresultaatsin = -asin;
-	int bresultaatcos = -acos;
+	double inputSize = image.getWidth()*image.getHeight(); // gewoon totale grote van de image
+	double realSize = static_cast<double>(scaleX)*static_cast<double>(scaleY); // Static cast om te zorgen dat de ints naar doubles gaan (200*200) 
+	double schaal = 1.0 / sqrt(inputSize / realSize); // berekend de goede schaal
 
-	for (int x = 0; x < image.getWidth(); x++){
-		for (int y = 0; y < image.getHeight(); y++){
-			x = round((acos + x) + (asin + y));
-			y = round((bresultaatsin + x) + (bresultaatcos + y));
-			if (){
+	vergrootObject->set(static_cast<int>(image.getWidth()*schaal), static_cast<int>(image.getHeight()*schaal)); // bereken het nieuwe object in breedte en hoogte
 
-			}
-			else{
+	for (int x = 0; x < vergrootObject->getWidth(); x++){
+		for (int y = 0; y < vergrootObject->getHeight(); y++){
+			double deltaX = x / schaal - floor(x / schaal); // floor is een afronding functie van math die afrond naar beneden
+			double deltaY = y / schaal - floor(y / schaal);
+			// ceil is het tegenovergestelde van floor
+			double J = image.getPixel(floor(x / schaal), floor(y / schaal)) + (image.getPixel(ceil(x / schaal), floor(y / schaal)) - image.getPixel(floor(x / schaal), floor(y / schaal))) * deltaX;
 
-			}
+			double T = image.getPixel(floor(x / schaal), ceil(y / schaal)) + (image.getPixel(ceil(x / schaal), ceil(y / schaal)) - image.getPixel(floor(x / schaal), ceil(y / schaal))) * deltaX;
+
+			int uiteindelijkePixel = J + (T - J) * deltaY;
+			vergrootObject->setPixel(x, y, uiteindelijkePixel);
 		}
 	}
+	return vergrootObject;
+	//bronnen:
+	//1. slides hu
+	// 2. http://en.wikipedia.org/wiki/Bilinear_interpolation
+	// 3. http://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm
 	//return nullptr;
 }
 
